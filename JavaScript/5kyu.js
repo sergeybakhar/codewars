@@ -1,3 +1,74 @@
+// ======================
+// Rot13
+
+// ROT13 is a simple letter substitution cipher that replaces a letter with the letter 13 letters after it in the alphabet. ROT13 is an example of the Caesar cipher.
+
+// Create a function that takes a string and returns the string ciphered with Rot13. If there are numbers or special characters included in the string, they should be returned as they are. Only letters from the latin/english alphabet should be shifted, like in the original Rot13 "implementation".
+
+function rot13(message) {
+  const firstLetters = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+  ];
+  const lastLetters = [
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+  ];
+  const messageArr = message.split("");
+
+  messageArr.forEach((letter, i) => {
+    if (/[a-zA-Z]/.test(letter)) {
+      const isUpperCase = letter === letter.toUpperCase();
+
+      if (isUpperCase) {
+        letter = letter.toLowerCase();
+      }
+
+      if (firstLetters.includes(letter)) {
+        const index = firstLetters.indexOf(letter);
+
+        if (isUpperCase) {
+          messageArr[i] = lastLetters[index].toUpperCase();
+        } else {
+          messageArr[i] = lastLetters[index];
+        }
+      } else {
+        const index = lastLetters.indexOf(letter);
+
+        if (isUpperCase) {
+          messageArr[i] = firstLetters[index].toUpperCase();
+        } else {
+          messageArr[i] = firstLetters[index];
+        }
+      }
+    }
+  });
+
+  return messageArr.join("");
+}
+
 
 // ======================
 // Maximum subarray sum
@@ -49,6 +120,7 @@ const maxSequence = arr => {
   })
   return res;
 };
+
 
 // ======================
 // RGB To Hex Conversion
